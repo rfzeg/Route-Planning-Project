@@ -23,6 +23,7 @@ class RoutePlanner {
   private:
     // Add private variables or methods declarations here.
     std::vector<RouteModel::Node*> open_list;
+    // A pointer to start_node is initialized
     RouteModel::Node *start_node;
     RouteModel::Node *end_node;
 
