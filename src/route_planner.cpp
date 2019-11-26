@@ -13,14 +13,15 @@ RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y, floa
   end_node = &m_Model.FindClosestNode(end_x, end_y);
 }
 
-
 // TODO 3: Implement the CalculateHValue method.
-// Tips:
-// - You can use the distance to the end_node for the h value.
-// - Node objects have a distance method to determine the distance to another node.
-
-float RoutePlanner::CalculateHValue(RouteModel::Node const *node) {
-
+// When the class methods are defined outside the class, the scope resolution operator ::
+// indicates which class the method belongs to
+float RoutePlanner::CalculateHValue(const RouteModel::Node *node) {
+  // Use the distance to the end_node for the h value.
+  // Node objects have a distance method to determine the distance to another node.
+  // Use -> to simultaneously dereference the pointer node (equivalent to writing *node)
+  // and access the distance() method (equivalent to using the . (dot) notation
+  return node->distance(*end_node);
 }
 
 
