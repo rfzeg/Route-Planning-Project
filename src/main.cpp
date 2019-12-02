@@ -55,13 +55,23 @@ int main(int argc, const char **argv)
     // TODO 1: Declare floats `start_x`, `start_y`, `end_x`, and `end_y` and get
     // user input for these values using std::cin. Pass the user input to the
     // RoutePlanner object below in place of 10, 10, 90, 90.
-    float start_x, start_y, end_x, end_y;
+    float start_x = 0, start_y = 0, end_x = 0, end_y = 0;
 
     std::cout << "Please enter the start and goal coordinates separated by a space." << std::endl;
     std::cout << "Input values must between 0 and 100 for the start x, start y, end x, and end y"<< std::endl;
     std::cout << "coordinates of the search (e.g.: 10 10 90 90)." << std::endl;
-    std::cin >> start_x >> start_y >> end_x >> end_y; 
-    
+    // check if cin fails, handles wrong data type input
+    while(!(std::cin >> start_x >> start_y >> end_x >> end_y)) {
+      std::cin.clear();
+      std::cin.ignore(1000, '\n');
+      std::cout << "Bad data, input must be a number, please try again." << std::endl;
+    }
+    // check valid range
+    while(start_x < 0 || start_y < 0 || end_x < 0 || end_y < 0 || start_x > 100 || start_y > 100 || end_x > 100 || end_y > 100){
+      std::cout << "Invalid value(s), please input only values between 0 and 100."<< std::endl;
+      std::cin >> start_x >> start_y >> end_x >> end_y;
+    }
+
     // Build Model.
     RouteModel model{osm_data};
 
